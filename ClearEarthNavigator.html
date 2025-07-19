@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear Earth Navigator !!!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #a8e6cf 0%, #dcedc8 100%);
+            color: #2e7d32;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+            text-align: left;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .earth-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 300px;
+            position: relative;
+        }
+
+        .earth {
+            width: 220px;
+            height: 220px;
+            background: linear-gradient(135deg, #4FC3F7 0%, #2196F3 30%, #4CAF50 40%, #2E7D32 70%, #1B5E20 100%);
+            border-radius: 50%;
+            position: relative;
+            animation: earthBounce 4s ease-in-out infinite;
+            box-shadow:
+                0 0 0 8px rgba(135, 206, 235, 0.3),
+                0 0 0 12px rgba(135, 206, 235, 0.2),
+                0 0 0 16px rgba(135, 206, 235, 0.1),
+                0 15px 35px rgba(0, 2, 0, 0.2);
+        }
+
+        .continents {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle at 25% 25%, rgba(76, 175, 80, 0.3) 0%, transparent 30%),
+                         radial-gradient(circle at 75% 40%, rgba(76, 175, 80, 0.3) 0%, transparent 25%),
+                         radial-gradient(circle at 50% 75%, rgba(76, 175, 80, 0.3) 0%, transparent 20%);
+            animation: earthRotate 25s linear infinite;
+        }
+
+        .earth-face {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 45px;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .eyes{
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            gap: 5px;
+            width: 45px;
+        }
+
+        .eye {
+            width: 20px;
+            height: 20px;
+            background: #000;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .eye::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 4px;
+        }
+
+        .smile {
+            width: 30px;
+            height: 15px;
+            border: 3px solid #000;
+            border-top: none;
+            border-radius: 0 0 15px 15px;
+            margin-top: 5px;
+        }
+
+        .cloud {
+            position: absolute;
+            z-index: 5;
+        }
+
+        .cloud1 {
+            top: 20px;
+            left: 30px;
+            animation: cloudFloat1 8s ease-in-out infinite;
+        }
+
+        .cloud2 {
+            top: 80px;
+            right: 20px;
+            animation: cloudFloat2 6s ease-in-out infinite 1s;
+        }
+
+        .cloud3 {
+            bottom: 40px;
+            left: 60px;
+            animation: cloudFloat3 7s ease-in-out infinite 2s;
+        }
+
+        .cloud-shape {
+            width: 40px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .cloud-shape::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            top: -8px;
+            left: 8px;
+        }
+
+        .cloud-shape::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            top: -6px;
+            right: 8px;
+        }
+
+        @keyframes earthBounce {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes earthRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes cloudFloat1 {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px);
+                opacity: 0.9;
+            }
+            25% {
+                transform: translateY(-10px) translateX(5px);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-5px) translateX(-5px);
+                opacity: 0.9;
+            }
+            75% {
+                transform: translateY(5px) translateX(3px);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes cloudFloat2 {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px);
+                opacity: 0.8;
+            }
+            33% {
+                transform: translateY(-8px) translateX(-3px);
+                opacity: 0.9;
+            }
+            66% {
+                transform: translateY(3px) translateX(-8px);
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes cloudFloat3 {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px);
+                opacity: 0.9;
+            }
+            30% {
+                transform: translateY(-6px) translateX(-3px);
+                opacity: 0.8;
+            }
+            70% {
+                transform: translateY(4px) translateX(6px);
+                opacity: 0.9;
+            }
+        }
+
+        .atmosphere {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, rgba(135, 206, 235, 0.4) 0%, rgba(135, 206, 235, 0.2) 50%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .main-content {
+            background: white;
+            min-height: 100vh;
+        }
+
+        .section {
+            padding: 60px 0;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #333;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff9a9e, #fecfef);
+        }
+
+        .dustbins {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .dustbin-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 5px solid;
+            width: 250px;
+            flex-shrink: 0;
+        }
+
+        .dustbin-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .blue-bin { border-color: #2196F3; }
+        .green-bin { border-color: #4CAF50; }
+        .red-bin { border-color: #F44336; }
+        .yellow-bin { border-color: #FF9800; }
+
+        .dustbin-icon {
+            width: 70px;
+            height: 90px;
+            margin: 0 auto 15px;
+            border-radius: 10px;
+            position: relative;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .blue-bin .dustbin-icon { background: #2196F3; }
+        .green-bin .dustbin-icon { background: #4CAF50; }
+        .red-bin .dustbin-icon { background: #F44336; }
+        .yellow-bin .dustbin-icon { background: #FF9800; }
+
+        .dustbin-icon::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            right: 10px;
+            height: 12px;
+            background: inherit;
+            border-radius: 5px;
+        }
+
+        .waste-icons {
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            width: 55px;
+            height: 65px;
+            font-size: 10px;
+            z-index: 1;
+        }
+
+        .waste-icon {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: white;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(2px);
+        }
+
+        .dustbin-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .dustbin-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .waste-types {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+            margin-top: 12px;
+        }
+
+        .waste-type {
+            background: #f5f5f5;
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .waste-type:hover {
+            background: #e0e0e0;
+            transform: scale(1.05);
+        }
+
+        /* Search Section */
+        .search-section {
+            background: #f8f2ff;
+            text-align: center;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: #667eea;
+        }
+
+        .search-result {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center; 
+            min-height: 120px; 
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .bin-message {
+            font-size: 1.2em;
+            margin-top: 15px;
+            color: #555;
+            font-weight: bold;
+            text-align: center; 
+        }
+
+        .bin {
+            width: 100px;
+            height: 120px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            transform: scale(0); 
+            animation: none; 
+        }
+
+        .bin.green { background-color: #4CAF50; }
+        .bin.blue { background-color: #2196F3; } 
+        .bin.red { background-color: #F44336; } 
+        .bin.grey { background-color: #607D8B; }
+        .bin.yellow {
+            background-color: #FFC107; 
+            color: #333; 
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.3);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .bin.animate-bounce {
+            animation: bounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .problem-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .problem-card:nth-child(1) { animation-delay: 0.1s; }
+        .problem-card:nth-child(2) { animation-delay: 0.2s; }
+        .problem-card:nth-child(3) { animation-delay: 0.3s; }
+        .problem-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .problem-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .problem-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .problem-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .quiz-section {
+            background: #fff4e6;
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quiz-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .quiz-card.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .question {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .options {
+            display: grid;
+            gap: 15px;
+        }
+
+        .option {
+            padding: 15px;
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            background: #e3f2fd;
+            border-color: #2196F3;
+        }
+
+        .option.selected {
+            background: #2196F3;
+            color: white;
+            border-color: #2196F3;
+        }
+
+        .quiz-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            background: #B2DFDB; 
+            color: #333; 
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            background-color: #80CBC4;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            background-color: #E0F2F1;
+            color: #666;
+        }
+
+        .score-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            display: none;
+        }
+
+        .score-card.show {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .score-display {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            background: #5a5a5a;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .footer p {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.2rem; }
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-text {
+                text-align: center;
+                min-width: auto;
+            }
+            .earth-container {
+                flex: none;
+            }
+            .earth { width: 150px; height: 150px; }
+            .section h2 { font-size: 2rem; }
+            .dustbins {
+                flex-direction: column;
+                align-items: center;
+            }
+            .dustbin-card {
+                width: 280px;
+            }
+            .problems-grid { grid-template-columns: 1fr; }
+
+            .eye {
+                width: 14px;
+                height: 14px;
+            }
+            .eye::after {
+                width: 4px;
+                height: 4px;
+            }
+            .smile {
+                width: 20px;
+                height: 10px;
+                margin-left: -10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Clear Earth Navigator</h1>
+                    <p>Let's clean the Earth!!!</p>
+                </div>
+                <div class="earth-container">
+                    <div class="earth">
+                        <div class="continents"></div>
+                        <div class="atmosphere"></div>
+                        <div class="earth-face">
+                            <div class="eyes">
+                                <div class="eye"></div>
+                                <div class="eye"></div>
+                            </div>
+                            <div class="smile"></div>
+                        </div>
+                    </div>
+
+
+                    <div class="cloud cloud1">
+                        <div class="cloud-shape"></div>
+                    </div>
+                    <div class="cloud cloud2">
+                        <div class="cloud-shape"></div>
+                    </div>
+                    <div class="cloud cloud3">
+                        <div class="cloud-shape"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <div class="main-content">
+
+
+        <section class="section">
+            <div class="container">
+                <h2>Types of Waste</h2>
+                <div class="dustbins">
+                    <div class="dustbin-card blue-bin">
+                        <div class="dustbin-icon">
+                            <div class="waste-icons">
+                                <div class="waste-icon">📄</div>
+                                <div class="waste-icon">🥤</div>
+                                <div class="waste-icon">🥫</div>
+                                <div class="waste-icon">🍾</div>
+                                <div class="waste-icon">📦</div>
+                                <div class="waste-icon">🗞️</div>
+                                <div class="waste-icon">♻️</div>
+                                <div class="waste-icon">🧃</div>
+                                <div class="waste-icon">🎯</div>
+                            </div>
+                        </div>
+                        <h3>Blue Bin</h3>
+                        <p>Recyclable Waste</p>
+                        <div class="waste-types">
+                            <span class="waste-type">Paper</span>
+                            <span class="waste-type">Cardboard</span>
+                            <span class="waste-type">Plastic bottles</span>
+                            <span class="waste-type">Cans</span>
+                            <span class="waste-type">Glass</span>
+                            <span class="waste-type">Newspapers</span>
+                            <span class="waste-type">Magazines</span>
+                        </div>
+                    </div>
+                    <div class="dustbin-card green-bin">
+                        <div class="dustbin-icon">
+                            <div class="waste-icons">
+                                <div class="waste-icon">🍌</div>
+                                <div class="waste-icon">🥕</div>
+                                <div class="waste-icon">🍃</div>
+                                <div class="waste-icon">☕</div>
+                                <div class="waste-icon">🍎</div>
+                                <div class="waste-icon">🥬</div>
+                                <div class="waste-icon">🌿</div>
+                                <div class="waste-icon">🥚</div>
+                                <div class="waste-icon">🍳</div>
+                            </div>
+                        </div>
+                        <h3>Green Bin</h3>
+                        <p>Organic Waste</p>
+                        <div class="waste-types">
+                            <span class="waste-type">Food scraps</span>
+                            <span class="waste-type">Fruit peels</span>
+                            <span class="waste-type">Garden waste</span>
+                            <span class="waste-type">Tea bags</span>
+                            <span class="waste-type">Coffee grounds</span>
+                            <span class="waste-type">Eggshells</span>
+                            <span class="waste-type">Vegetable scraps</span>
+                        </div>
+                    </div>
+                    <div class="dustbin-card red-bin">
+                        <div class="dustbin-icon">
+                            <div class="waste-icons">
+                                <div class="waste-icon">🔋</div>
+                                <div class="waste-icon">📱</div>
+                                <div class="waste-icon">🎨</div>
+                                <div class="waste-icon">💊</div>
+                                <div class="waste-icon">🧪</div>
+                                <div class="waste-icon">🔬</div>
+                                <div class="waste-icon">⚗️</div>
+                                <div class="waste-icon">🩸</div>
+                                <div class="waste-icon">⚠️</div>
+                            </div>
+                        </div>
+                        <h3>Red Bin</h3>
+                        <p>Hazardous Waste</p>
+                        <div class="waste-types">
+                            <span class="waste-type">Batteries</span>
+                            <span class="waste-type">Electronics</span>
+                            <span class="waste-type">Chemicals</span>
+                            <span class="waste-type">Paint</span>
+                            <span class="waste-type">Medical waste</span>
+                            <span class="waste-type">Light bulbs</span>
+                            <span class="waste-type">Pesticides</span>
+                        </div>
+                    </div>
+                    <div class="dustbin-card yellow-bin">
+                        <div class="dustbin-icon">
+                            <div class="waste-icons">
+                                <div class="waste-icon">👶</div>
+                                <div class="waste-icon">🧻</div>
+                                <div class="waste-icon">🚬</div>
+                                <div class="waste-icon">🏺</div>
+                                <div class="waste-icon">🧽</div>
+                                <div class="waste-icon">🧷</div>
+                                <div class="waste-icon">🔗</div>
+                                <div class="waste-icon">🎭</div>
+                                <div class="waste-icon">🗑️</div>
+                            </div>
+                        </div>
+                        <h3>Yellow Bin</h3>
+                        <p>General Waste</p>
+                        <div class="waste-types">
+                            <span class="waste-type">Diapers</span>
+                            <span class="waste-type">Tissues</span>
+                            <span class="waste-type">Cigarette butts</span>
+                            <span class="waste-type">Rubber</span>
+                            <span class="waste-type">Ceramics</span>
+                            <span class="waste-type">Cat litter</span>
+                            <span class="waste-type">Dust</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="section search-section">
+            <div class="container">
+                <h2>Find the Right Bin</h2>
+                <div class="search-container">
+                    <div class="search-box">
+                       
+
+                        <input type="text" class="search-input" placeholder="Type a waste item (e.g., banana peel, plastic bottle)..." id="searchInput">
+                    </div>
+                    
+
+                    <div class="search-result" id="searchResultContainer">
+                        <p>Start typing to find which bin your waste belongs to!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="section">
+            <div class="container">
+                <h2>Problems Caused by Improper Waste Management</h2>
+                <div class="problems-grid">
+                    <div class="problem-card">
+                        <div class="problem-icon">🌊</div>
+                        <h3>Water Pollution</h3>
+                        <p>Improper waste disposal contaminates water sources, affecting marine life and making water unsafe for human consumption.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon">🌬️</div>
+                        <h3>Air Pollution</h3>
+                        <p>Burning waste releases toxic gases and particulates into the atmosphere, contributing to respiratory diseases and climate change.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon">🦠</div>
+                        <h3>Disease Spread</h3>
+                        <p>Accumulated waste becomes a breeding ground for bacteria, viruses, and pests, leading to various health problems in communities.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon">🐠</div>
+                        <h3>Marine Damage</h3>
+                        <p>Plastic waste in oceans harms marine animals through ingestion and entanglement, disrupting entire ecosystems.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="section quiz-section">
+            <div class="container">
+                <h2>Waste Management Quiz</h2>
+                <div class="quiz-container">
+                    <div class="quiz-card active" id="quiz">
+                        <div class="question" id="questionText">Which bin should you use for banana peels?</div>
+                        <div class="options" id="optionsContainer">
+                            <div class="option" data-answer="green">Green Bin</div>
+                            <div class="option" data-answer="blue">Blue Bin</div>
+                            <div class="option" data-answer="red">Red Bin</div>
+                            <div class="option" data-answer="yellow">Yellow Bin</div>
+                        </div>
+                        <div class="quiz-controls">
+                            <button class="btn" id="submitAnswerBtn">Submit Answer</button>
+                            <button class="btn" id="nextQuestionBtn" style="display: none;">Next Question</button>
+                        </div>
+                        <p id="feedback" style="margin-top: 15px; font-weight: bold;"></p>
+                    </div>
+                    <div class="score-card" id="scoreCard">
+                        <h3>Quiz Complete!</h3>
+                        <p>Your Score:</p>
+                        <div class="score-display" id="scoreDisplay">0/0</div>
+                        <button class="btn" id="restartQuizBtn">Restart Quiz</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+
+
+    <footer class="footer">
+        <div class="container">
+            <p>"The greatest threat to our planet is the belief that someone else will save it."</p>
+        </div>
+    </footer>
+
+
+
+    <script>
+        const quizData = [
+            {
+                question: "Which bin should you use for banana peels?",
+                options: ["Green Bin", "Blue Bin", "Red Bin", "Yellow Bin"],
+                correctAnswer: "Green Bin"
+            },
+            {
+                question: "Where do plastic bottles typically go?",
+                options: ["Red Bin", "Blue Bin", "Green Bin", "Yellow Bin"],
+                correctAnswer: "Blue Bin"
+            },
+            {
+                question: "What type of waste goes into the Red Bin?",
+                options: ["Organic Waste", "Recyclable Waste", "Hazardous Waste", "General Waste"],
+                correctAnswer: "Hazardous Waste"
+            },
+            {
+                question: "Which bin is generally for non-recyclable general waste like food wrappers?",
+                options: ["Green Bin", "Blue Bin", "Red Bin", "Yellow Bin"],
+                correctAnswer: "Yellow Bin"
+            },{
+                question: "Which of the following is the best method to manage biodegradable waste at home?",
+                options: ["Burning the waste","Throwing it in the garbage bin","Composting the waste","Dumping it in a river"],
+                correctAnswer: "Composting the waste"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let selectedOption = null;
+
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const submitAnswerBtn = document.getElementById('submitAnswerBtn');
+        const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+        const feedback = document.getElementById('feedback');
+        const quizCard = document.getElementById('quiz');
+        const scoreCard = document.getElementById('scoreCard');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const restartQuizBtn = document.getElementById('restartQuizBtn');
+
+        function loadQuestion() {
+            if (currentQuestionIndex < quizData.length) {
+                const currentQuiz = quizData[currentQuestionIndex];
+                questionText.textContent = currentQuiz.question;
+                optionsContainer.innerHTML = '';
+                currentQuiz.options.forEach(option => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.classList.add('option');
+                    optionDiv.textContent = option;
+                    optionDiv.dataset.answer = option.split(' ')[0].toLowerCase();
+                    optionDiv.addEventListener('click', () => selectOption(optionDiv));
+                    optionsContainer.appendChild(optionDiv);
+                });
+                submitAnswerBtn.style.display = 'block';
+                nextQuestionBtn.style.display = 'none';
+                feedback.textContent = '';
+                selectedOption = null;
+                document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            } else {
+                showScore();
+            }
+        }
+
+        function selectOption(optionDiv) {
+            if (selectedOption) {
+                selectedOption.classList.remove('selected');
+            }
+            selectedOption = optionDiv;
+            selectedOption.classList.add('selected');
+        }
+
+        submitAnswerBtn.addEventListener('click', () => {
+            if (selectedOption) {
+                const userAnswer = selectedOption.textContent;
+                const correctAnswer = quizData[currentQuestionIndex].correctAnswer;
+
+                if (userAnswer === correctAnswer) {
+                    feedback.textContent = "Correct! 🎉";
+                    feedback.style.color = '#4CAF50';
+                    score++;
+                } else {
+                    feedback.textContent = `Wrong. The correct answer was: ${correctAnswer} 😔`;
+                    feedback.style.color = '#F44336';
+                }
+                submitAnswerBtn.style.display = 'none';
+                nextQuestionBtn.style.display = 'block';
+                document.querySelectorAll('.option').forEach(opt => opt.style.pointerEvents = 'none');
+            } else {
+                feedback.textContent = "Please select an answer!";
+                feedback.style.color = '#FFC107';
+            }
+        });
+
+        nextQuestionBtn.addEventListener('click', () => {
+            currentQuestionIndex++;
+            document.querySelectorAll('.option').forEach(opt => opt.style.pointerEvents = 'auto');
+            loadQuestion();
+        });
+
+        function showScore() {
+            quizCard.classList.remove('active');
+            scoreCard.classList.add('show');
+            scoreDisplay.textContent = `${score}/${quizData.length}`;
+        }
+
+        restartQuizBtn.addEventListener('click', () => {
+            currentQuestionIndex = 0;
+            score = 0;
+            scoreCard.classList.remove('show');
+            quizCard.classList.add('active');
+            loadQuestion();
+        });
+
+        loadQuestion();
+        const searchInput = document.getElementById('searchInput');
+        const searchResultContainer = document.getElementById('searchResultContainer');
+        const wasteMap = {
+            "banana peel": { bin: "green", message: "Banana peel goes in the Green Bin ♻️" },
+            "apple core": { bin: "green", message: "Apple core goes in the Green Bin ♻️" },
+            "vegetable scraps": { bin: "green", message: "Vegetable scraps go in the Green Bin ♻️" },
+            "tea bags": { bin: "green", message: "Tea bags go in the Green Bin ♻️" },
+            "coffee grounds": { bin: "green", message: "Coffee grounds go in the Green Bin ♻️" },
+            "leaves": { bin: "green", message: "Leaves go in the Green Bin ♻️" },
+            "grass clippings": { bin: "green", message: "Grass clippings go in the Green Bin ♻️" },
+            "food waste": { bin: "green", message: "Food waste goes in the Green Bin ♻️" },
+            "compostable items": { bin: "green", message: "Compostable items go in the Green Bin ♻️" },
+
+            "plastic bottle": { bin: "blue", message: "Plastic bottle goes in the Blue Bin 🔵" },
+            "plastic container": { bin: "blue", message: "Plastic container goes in the Blue Bin 🔵" },
+            "cardboard box": { bin: "blue", message: "Cardboard box goes in the Blue Bin 🔵" },
+            "newspaper": { bin: "blue", message: "Newspaper goes in the Blue Bin 🔵" },
+            "magazine": { bin: "blue", message: "Magazine goes in the Blue Bin 🔵" },
+            "glass bottle": { bin: "blue", message: "Glass bottle goes in the Blue Bin 🔵" },
+            "aluminum can": { bin: "blue", message: "Aluminum can goes in the Blue Bin 🔵" },
+            "tin can": { bin: "blue", message: "Tin can goes in the Blue Bin 🔵" },
+            "paper": { bin: "blue", message: "Paper goes in the Blue Bin 🔵" },
+            "cartons": { bin: "blue", message: "Cartons go in the Blue Bin 🔵" },
+
+            "broken plate": { bin: "red", message: "Broken plate goes in the Red Bin ⛔" },
+            "light bulb": { bin: "red", message: "Light bulb goes in the Red Bin ⛔" },
+            "ceramics": { bin: "red", message: "Ceramics go in the Red Bin ⛔" },
+            "batteries": { bin: "red", message: "Batteries go in the Red Bin ⛔ (Dispose of properly at a collection point)" },
+            "electronics": { bin: "red", message: "Electronics go in the Red Bin ⛔ (Dispose of properly at a collection point)" },
+            "medical waste": { bin: "red", message: "Medical waste goes in the Red Bin ⛔ (Handle with extreme care)" },
+            "paint cans": { bin: "red", message: "Paint cans go in the Red Bin ⛔ (Proper disposal required)" },
+            "chemicals": { bin: "red", message: "Chemicals go in the Red Bin ⛔ (Proper disposal required)" },
+            "sharp objects": { bin: "red", message: "Sharp objects go in the Red Bin ⛔ (Handle with extreme care)" },
+            "hazardous waste": { bin: "red", message: "Hazardous waste goes in the Red Bin ⛔ (Proper disposal required)" },
+
+            "food wrapper": { bin: "grey", message: "Food wrapper goes in the Grey Bin ⚫" },
+            "styrofoam": { bin: "grey", message: "Styrofoam goes in the Grey Bin ⚫" },
+            "plastic bag": { bin: "grey", message: "Plastic bag goes in the Grey Bin ⚫" },
+            "dirty tissue": { bin: "grey", message: "Dirty tissue goes in the Grey Bin ⚫" },
+            "sweets wrapper": { bin: "grey", message: "Sweets wrapper goes in the Grey Bin ⚫" },
+            "broken toys (non-electronic)": { bin: "grey", message: "Broken toys go in the Grey Bin ⚫" },
+            "chip packet": { bin: "grey", message: "Chip packet goes in the Grey Bin ⚫" },
+            "non-recyclable plastic": { bin: "grey", message: "Non-recyclable plastic goes in the Grey Bin ⚫" },
+            "general waste": { bin: "grey", message: "General waste goes in the Grey Bin ⚫" },
+            "sanitary products": { bin: "grey", message: "Sanitary products go in the Grey Bin ⚫" },
+
+            "metals": { bin: "yellow", message: "Metals go in the Yellow Bin 🟡" },
+            "plastic film": { bin: "yellow", message: "Plastic film goes in the Yellow Bin 🟡" },
+            "tetrapak": { bin: "yellow", message: "Tetrapak goes in the Yellow Bin 🟡" },
+            "rigid plastic": { bin: "yellow", message: "Rigid plastic goes in the Yellow Bin 🟡" },
+            "mixed dry waste": { bin: "yellow", message: "Mixed dry waste goes in the Yellow Bin 🟡" },
+            "clean plastic packaging": { bin: "yellow", message: "Clean plastic packaging goes in the Yellow Bin 🟡" },
+            "foil": { bin: "yellow", message: "Foil goes in the Yellow Bin 🟡" },
+            "cans": { bin: "yellow", message: "Cans go in the Yellow Bin 🟡" }
+        };
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            searchResultContainer.innerHTML = '';
+            if (searchTerm === '') {
+                searchResultContainer.innerHTML = '<p>Start typing to find which bin your waste belongs to!</p>';
+                return;
+            }
+            const foundItem = wasteMap[searchTerm];
+            if (foundItem) {
+                const binDiv = document.createElement('div');
+                binDiv.classList.add('bin', foundItem.bin, 'animate-bounce');
+                binDiv.textContent = '';
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('bin-message');
+                messageDiv.textContent = foundItem.message;
+                searchResultContainer.appendChild(binDiv);
+                searchResultContainer.appendChild(messageDiv);
+                binDiv.classList.remove('animate-bounce');
+                void binDiv.offsetWidth;
+                binDiv.classList.add('animate-bounce');
+
+            } else {
+                const noResultDiv = document.createElement('div');
+                noResultDiv.classList.add('bin-message');
+                noResultDiv.style.color = '#FF5722';
+                noResultDiv.textContent = `Sorry, "${searchTerm}" is not in our list. Try another item. 😔`;
+                searchResultContainer.appendChild(noResultDiv);
+            }
+        });
+    </script>
+</body>
+</html>
